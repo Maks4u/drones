@@ -14,7 +14,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    public Airplane get(Long id) {
+    public Airplane get(String id) {
         return airplaneRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Can't find such Airplane by ID: " + id));
     }
@@ -25,7 +25,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         airplaneRepository.deleteById(id);
     }
 
