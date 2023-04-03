@@ -19,7 +19,13 @@
 
 4. You can change data in [TestData.class](src/main/java/application/data/TestData.java) to get exact location of your artifact in earth surface and set different waypoints.
 
-p.s. it may give you uncorrected latitude and longitude if you pass invalid value!!! Please set the value from Google Maps to check it.
+WARNING 🔴 it may give you uncorrected latitude and longitude if you pass invalid value!!! Please set the value from Google Maps to check it.
 
 
+The way that used here:
 
+![map with dots](src/main/resources/WayPoints.jpg "Google Maps")
+
+Example of coordinates log (or check MongoDB after run the project):
+
+![console log](src/main/resources/Console%20log.jpg "Log")

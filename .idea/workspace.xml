@@ -5,40 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="419976a5-7608-4a04-a60a-c79272fe1394" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/data/TestData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/repository/FlightRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/service/FlightService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/service/impl/FlightServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/OperationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/StrategyHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/AccelerationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/CoordinateHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/DegreeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/DistanceHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/DroppingSpeedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/FlyMaxSpeedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/HeightHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/MovementRotationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/PlaceRotationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/application/strategy/impl/StrategyHandlerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/model/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/model/Airplane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/model/AirplaneCharacteristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/model/AirplaneCharacteristics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/model/TemporaryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/model/TemporaryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/model/WayPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/model/WayPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/repository/AirplaneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/repository/AirplaneRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/repository/TemporaryPointRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/AirplaneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/service/AirplaneService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/FlyManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/service/FlyManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/TemporaryPointService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/impl/AirplaneServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/service/impl/AirplaneServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/impl/FlyManagerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/service/impl/FlyManagerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/application/service/impl/TemporaryPointServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/application/data/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/data/TestData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +99,7 @@
       <workItem from="1680177902196" duration="8571000" />
       <workItem from="1680273717471" duration="11338000" />
       <workItem from="1680357057242" duration="17593000" />
-      <workItem from="1680391441901" duration="77254000" />
+      <workItem from="1680391441901" duration="81467000" />
     </task>
     <servers />
   </component>
@@ -144,12 +111,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/application/strategy/impl/DistanceHandler.java</url>
-          <line>11</line>
+          <line>12</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/application/strategy/impl/DegreeHandler.java</url>
-          <line>46</line>
+          <line>55</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
