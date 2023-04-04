@@ -2,16 +2,12 @@
 
 This is a project that used MongoDB + Spring Boot 2 + Java 17 + Maven configuration. It allows to get temporaryPoints from every second of flying between WayPoints that can be setted.
 
----
-
 ## Tools used in a project:
 
 - #### Java 17;
 - #### Spring Boot;
 - #### MongoDB;
 - #### Maven;
-
----
 
 ## Project Structure 📁
 
@@ -33,9 +29,7 @@ DroneLocation follows a standard project structure for Spring-based applications
 
 - `resources`: This directory contains the `application.properties` file, that has the database configuration.
 
----
-
-### To run and test application you need:
+## To run and test application you need:
 
 1. Install MongoDB
 
