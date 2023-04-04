@@ -59,8 +59,6 @@ public class FlyManagerServiceImpl implements FlyManagerService {
         //start airplane
         airplane.setOperation(Airplane.Operation.PLACE_ROTATION);
 
-        int i = 0;
-
         //proceed every WayPoint before it passed
         for (WayPoint point: wayPoints) {
             //if WayPoint not passed & airplane fly do calculations
@@ -71,17 +69,19 @@ public class FlyManagerServiceImpl implements FlyManagerService {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                i++;
                 OperationHandler operationHandler = strategyHandler
                         .doOperation(airplane.getOperation());
                 operationHandler.getTemporaryPoint(airplane, point);
                 TemporaryPoint temporaryPoint = createNewPoint(airplane);
                 //update airplane in MongoDB
                 airplaneService.update(airplane);
+                //visualisation in console
                 if (point.getStatus().equals(WayPoint.Status.PASSED)) {
-                    System.out.println(i + " " + temporaryPoint + " " + airplane.getOperation().name() + " WayPoint PASSED");
+                    System.out.println(temporaryPoints.size() + " " + temporaryPoint
+                            + " " + airplane.getOperation().name() + " WayPoint PASSED");
                 } else {
-                    System.out.println(i + " " + temporaryPoint + " " + airplane.getOperation().name());
+                    System.out.println(temporaryPoints.size() + " " + temporaryPoint
+                            + " " + airplane.getOperation().name());
                 }
                 temporaryPoints.add(temporaryPoint);
                 flight.setPassedPoints(temporaryPoints);
