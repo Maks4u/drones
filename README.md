@@ -35,9 +35,11 @@ DroneLocation follows a standard project structure for Spring-based applications
 
 2. Run MongoDB
 
-3. Run project locally. Verify everything works well.
+3. Create database named `DroneDB` or set your name and change spring.data.mongodb.database=`YOUR_DATABASE_NAME` in [application.properties](src/main/resources/application.properties)
 
-4. You can change data in [DataInjector.class](src/main/java/application/data/TestData.java) to get exact location of your artifact in earth surface and set different waypoints.
+4. Run project locally. Verify everything works well.
+
+5. You can change data in [DataInjector.class](src/main/java/application/data/DataInjector.java) to get exact location of your artifact in earth surface and set different waypoints.
 
 WARNING 🔴 it may give you uncorrected latitude and longitude if you pass invalid value!!! Please set the value from Google Maps to check it.
 
