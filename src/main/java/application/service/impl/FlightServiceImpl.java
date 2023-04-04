@@ -14,7 +14,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight get(String id) {
+    public Flight findById(String id) {
         return flightRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Can't find such Flight by ID: " + id));
     }
@@ -22,11 +22,6 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public Flight save(Flight flight) {
         return flightRepository.save(flight);
-    }
-
-    @Override
-    public void delete(String id) {
-        flightRepository.deleteById(id);
     }
 
     @Override

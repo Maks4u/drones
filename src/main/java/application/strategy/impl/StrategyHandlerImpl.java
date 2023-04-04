@@ -21,7 +21,7 @@ public class StrategyHandlerImpl implements StrategyHandler {
     }
 
     @Override
-    public OperationHandler doOperation(Airplane.Operation operation) {
+    public OperationHandler getOperationHandler(Airplane.Operation operation) {
         return action.get(operation);
     }
 }

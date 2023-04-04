@@ -29,16 +29,29 @@ public class FlyManagerServiceImpl implements FlyManagerService {
 
     @Override
     public List<TemporaryPoint> calculateRoute(Airplane airplane, List<WayPoint> wayPoints) {
-        //show related data
-        if (airplane.getFlights() == null) {
-            System.out.println("Count of flights: 0 and their total duration: 0s");
-        } else {
-            System.out.println("Count of flights: " + airplane.getFlights().size()
-                    + " and their total duration: " + airplane.getFlights().stream()
-                    .map(Flight::getWayPoints).count() + "s");
+        getStartMessage(airplane);
+        Flight flight = getFlight(airplane, wayPoints);
+        List<TemporaryPoint> temporaryPoints = new ArrayList<>();
+        temporaryPoints.add(createNewPoint(airplane));
+        airplane.setOperation(Airplane.Operation.PLACE_ROTATION);
+        for (WayPoint point: wayPoints) {
+            while (!airplane.getOperation().equals(Airplane.Operation.NO_ACTION)
+                    && point.getStatus().equals(WayPoint.Status.NOT_PASSED)) {
+                OperationHandler operationHandler = strategyHandler
+                        .getOperationHandler(airplane.getOperation());
+                operationHandler.getTemporaryPoint(airplane, point);
+                TemporaryPoint temporaryPoint = createNewPoint(airplane);
+                airplaneService.update(airplane);
+                temporaryPoints.add(temporaryPoint);
+                flight.setPassedPoints(temporaryPoints);
+            }
         }
+        airplaneService.update(airplane);
+        flightService.update(flight);
+        return temporaryPoints;
+    }
 
-        //create new flight
+    private Flight getFlight(Airplane airplane, List<WayPoint> wayPoints) {
         Flight flight = new Flight();
         flight.setWayPoints(wayPoints);
         List<Flight> flights = new ArrayList<>();
@@ -52,50 +65,20 @@ public class FlyManagerServiceImpl implements FlyManagerService {
         flightService.save(flight);
         airplane.setFlights(flights);
         airplaneService.update(airplane);
+        return flight;
+    }
 
-        //create list of passed points
-        List<TemporaryPoint> temporaryPoints = new ArrayList<>();
-        temporaryPoints.add(createNewPoint(airplane));
-        //start airplane
-        airplane.setOperation(Airplane.Operation.PLACE_ROTATION);
-
-        //proceed every WayPoint before it passed
-        for (WayPoint point: wayPoints) {
-            //if WayPoint not passed & airplane fly do calculations
-            while (!airplane.getOperation().equals(Airplane.Operation.NO_ACTION)
-                    && point.getStatus().equals(WayPoint.Status.NOT_PASSED)) {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                OperationHandler operationHandler = strategyHandler
-                        .doOperation(airplane.getOperation());
-                operationHandler.getTemporaryPoint(airplane, point);
-                TemporaryPoint temporaryPoint = createNewPoint(airplane);
-                //update airplane in MongoDB
-                airplaneService.update(airplane);
-                //visualisation in console
-                if (point.getStatus().equals(WayPoint.Status.PASSED)) {
-                    System.out.println(temporaryPoints.size() + " " + temporaryPoint
-                            + " " + airplane.getOperation().name() + " WayPoint PASSED");
-                } else {
-                    System.out.println(temporaryPoints.size() + " " + temporaryPoint
-                            + " " + airplane.getOperation().name());
-                }
-                temporaryPoints.add(temporaryPoint);
-                flight.setPassedPoints(temporaryPoints);
-            }
+    private void getStartMessage(Airplane airplane) {
+        if (airplane.getFlights() == null) {
+            System.out.println("Count of flights: 0 and their total duration: 0s");
+        } else {
+            System.out.println("Count of flights: " + airplane.getFlights().size()
+                    + " and their total duration: " + airplane.getFlights().stream()
+                    .map(Flight::getWayPoints).count() + "s");
         }
-        //set last position
-        airplaneService.update(airplane);
-        //update flight in MongoDB
-        flightService.update(flight);
-        return temporaryPoints;
     }
 
     private TemporaryPoint createNewPoint(Airplane airplane) {
-        //create new point
         TemporaryPoint temporaryPoint = new TemporaryPoint();
         temporaryPoint.setLatitude(airplane.getPosition().getLatitude());
         temporaryPoint.setLongitude(airplane.getPosition().getLongitude());

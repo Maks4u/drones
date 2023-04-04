@@ -9,19 +9,21 @@ import application.service.FlyManagerService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestData {
+public class DataInjector {
     private final FlyManagerService flyManagerService;
     private final AirplaneService airplaneService;
 
-    public TestData(FlyManagerService flyManagerService,
-                    AirplaneService airplaneService) {
+    public DataInjector(FlyManagerService flyManagerService,
+                        AirplaneService airplaneService) {
         this.flyManagerService = flyManagerService;
         this.airplaneService = airplaneService;
     }
 
+    @PostConstruct
     public void runMocData() {
         //create airplane
         final Airplane airplane = new Airplane();
@@ -46,35 +48,35 @@ public class TestData {
         airplane.setCharacteristics(airplaneCharacteristics);
 
         //create 4 WayPoints
-        WayPoint wayPoint = new WayPoint();
-        wayPoint.setLatitude("50.488730955851565");
-        wayPoint.setLongitude("30.641924954435197");
-        wayPoint.setFlyHeight(BigDecimal.valueOf(160L));
-        wayPoint.setSpeed(BigDecimal.valueOf(10L));
+        WayPoint firstWayPoint = new WayPoint();
+        firstWayPoint.setLatitude("50.488730955851565");
+        firstWayPoint.setLongitude("30.641924954435197");
+        firstWayPoint.setFlyHeight(BigDecimal.valueOf(160L));
+        firstWayPoint.setSpeed(BigDecimal.valueOf(10L));
 
-        WayPoint wayPoint1 = new WayPoint();
-        wayPoint1.setLatitude("50.495836497886714");
-        wayPoint1.setLongitude("30.637089248335265");
-        wayPoint1.setFlyHeight(BigDecimal.valueOf(210L));
-        wayPoint1.setSpeed(BigDecimal.valueOf(5L));
+        WayPoint secondWayPoint = new WayPoint();
+        secondWayPoint.setLatitude("50.495836497886714");
+        secondWayPoint.setLongitude("30.637089248335265");
+        secondWayPoint.setFlyHeight(BigDecimal.valueOf(210L));
+        secondWayPoint.setSpeed(BigDecimal.valueOf(5L));
 
-        WayPoint wayPoint2 = new WayPoint();
-        wayPoint2.setLatitude("50.4939999496959");
-        wayPoint2.setLongitude("30.64630956854819");
-        wayPoint2.setFlyHeight(BigDecimal.valueOf(190L));
-        wayPoint2.setSpeed(BigDecimal.valueOf(6L));
+        WayPoint thirdWayPoint = new WayPoint();
+        thirdWayPoint.setLatitude("50.4939999496959");
+        thirdWayPoint.setLongitude("30.64630956854819");
+        thirdWayPoint.setFlyHeight(BigDecimal.valueOf(190L));
+        thirdWayPoint.setSpeed(BigDecimal.valueOf(6L));
 
-        WayPoint wayPoint3 = new WayPoint();
-        wayPoint3.setLatitude("50.49691895986775");
-        wayPoint3.setLongitude("30.64828081715136");
-        wayPoint3.setFlyHeight(BigDecimal.valueOf(120L));
-        wayPoint3.setSpeed(BigDecimal.valueOf(26L));
+        WayPoint fourthWayPoint = new WayPoint();
+        fourthWayPoint.setLatitude("50.49691895986775");
+        fourthWayPoint.setLongitude("30.64828081715136");
+        fourthWayPoint.setFlyHeight(BigDecimal.valueOf(120L));
+        fourthWayPoint.setSpeed(BigDecimal.valueOf(26L));
 
         List<WayPoint> wayPoints = new ArrayList<>();
-        wayPoints.add(wayPoint);
-        wayPoints.add(wayPoint1);
-        wayPoints.add(wayPoint2);
-        wayPoints.add(wayPoint3);
+        wayPoints.add(firstWayPoint);
+        wayPoints.add(secondWayPoint);
+        wayPoints.add(thirdWayPoint);
+        wayPoints.add(fourthWayPoint);
 
         airplaneService.save(airplane);
         flyManagerService.calculateRoute(airplane, wayPoints);
