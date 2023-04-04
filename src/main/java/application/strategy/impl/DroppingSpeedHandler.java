@@ -7,7 +7,9 @@ import application.strategy.OperationHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DroppingSpeedHandler implements OperationHandler {
     @Override
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
@@ -44,6 +46,11 @@ public class DroppingSpeedHandler implements OperationHandler {
             calculateTemporaryPoint(airplane, wayPoint, BigDecimal.ONE);
         }
         return airplane.getPosition();
+    }
+
+    @Override
+    public Airplane.Operation getOperation() {
+        return Airplane.Operation.DROPPING_SPEED;
     }
 
     public void calculateTemporaryPoint(Airplane airplane,

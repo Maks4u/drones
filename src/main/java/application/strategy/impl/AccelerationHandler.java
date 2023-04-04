@@ -7,7 +7,9 @@ import application.strategy.OperationHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccelerationHandler implements OperationHandler {
 
     @Override
@@ -62,5 +64,10 @@ public class AccelerationHandler implements OperationHandler {
         //set new height
         HeightHandler.setHeight(airplane, wayPoint, time);
         return airplane.getPosition();
+    }
+
+    @Override
+    public Airplane.Operation getOperation() {
+        return Airplane.Operation.ACCELERATION;
     }
 }

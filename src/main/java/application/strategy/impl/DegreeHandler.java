@@ -12,7 +12,8 @@ public class DegreeHandler {
         BigDecimal amountDegreeToRotateLeft;
         if (airplane.getPosition().getDegree().compareTo(HALF_CIRCLE_DEGREE) > 0) {
             amountDegreeToRotateLeft = BigDecimal.valueOf(wayDegree).abs()
-                    .subtract((MAX_CIRCLE_DEGREE).subtract(airplane.getPosition().getDegree()).abs());
+                    .subtract((MAX_CIRCLE_DEGREE).subtract(airplane
+                            .getPosition().getDegree()).abs());
         } else {
             amountDegreeToRotateLeft = BigDecimal.valueOf(wayDegree).abs().subtract(airplane
                     .getPosition().getDegree().abs());

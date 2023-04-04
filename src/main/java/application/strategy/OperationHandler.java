@@ -6,4 +6,6 @@ import application.model.WayPoint;
 
 public interface OperationHandler {
     TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint);
+
+    Airplane.Operation getOperation();
 }

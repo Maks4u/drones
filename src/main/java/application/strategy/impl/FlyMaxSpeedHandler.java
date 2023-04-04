@@ -7,7 +7,9 @@ import application.strategy.OperationHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FlyMaxSpeedHandler implements OperationHandler {
     @Override
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
@@ -23,7 +25,9 @@ public class FlyMaxSpeedHandler implements OperationHandler {
             BigDecimal leftDistanceOnMaxSpeed = distanceToWayPoint.subtract(distanceToDropSpeed);
             if (airplane.getFlights().get(airplane.getFlights().size() - 1)
                     .getWayPoints().size() == airplane.getFlights().get(airplane.getFlights()
-                    .size() - 1).getWayPoints().indexOf(wayPoint) + 1) {
+                    .size() - 1).getWayPoints().indexOf(wayPoint) + 1
+                    && distanceToWayPoint.compareTo(airplane
+                    .getCharacteristics().getMaxSpeed()) < 0) {
                 calculateTemporaryPoint(airplane, wayPoint, distanceToWayPoint.divide(airplane
                         .getPosition().getSpeed(), MathContext.DECIMAL128));
                 airplane.setOperation(Airplane.Operation.NO_ACTION);
@@ -42,6 +46,11 @@ public class FlyMaxSpeedHandler implements OperationHandler {
         TemporaryPoint temporaryPoint = calculateTemporaryPoint(airplane, wayPoint, BigDecimal.ONE);
         airplane.setOperation(Airplane.Operation.MAX_SPEED_FLYING);
         return temporaryPoint;
+    }
+
+    @Override
+    public Airplane.Operation getOperation() {
+        return Airplane.Operation.MAX_SPEED_FLYING;
     }
 
     public TemporaryPoint calculateTemporaryPoint(Airplane airplane, WayPoint wayPoint,

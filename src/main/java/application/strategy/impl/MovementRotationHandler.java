@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MovementRotationHandler implements OperationHandler {
     private static final Integer LATITUDE_INDEX = 0;
     private static final Integer LONGITUDE_INDEX = 1;
@@ -32,10 +34,17 @@ public class MovementRotationHandler implements OperationHandler {
         return airplane.getPosition();
     }
 
+    @Override
+    public Airplane.Operation getOperation() {
+        return Airplane.Operation.MOVEMENT_ROTATION;
+    }
+
     public void calculateTemporaryPoint(Airplane airplane, WayPoint wayPoint, BigDecimal time) {
         List<Double> coords = CoordinateHandler.calculateNewCoordinatesRotating(airplane, time);
-        airplane.getPosition().setLatitude(String.valueOf(Math.toDegrees(coords.get(LATITUDE_INDEX))));
-        airplane.getPosition().setLongitude(String.valueOf(Math.toDegrees(coords.get(LONGITUDE_INDEX))));
+        airplane.getPosition().setLatitude(String
+                .valueOf(Math.toDegrees(coords.get(LATITUDE_INDEX))));
+        airplane.getPosition().setLongitude(String
+                .valueOf(Math.toDegrees(coords.get(LONGITUDE_INDEX))));
 
         //calculate new degree
         double wayDegree = DegreeHandler.getWayDegree(airplane, wayPoint);

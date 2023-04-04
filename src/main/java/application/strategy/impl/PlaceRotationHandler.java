@@ -7,7 +7,9 @@ import application.strategy.OperationHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlaceRotationHandler implements OperationHandler {
     @Override
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
@@ -59,5 +61,10 @@ public class PlaceRotationHandler implements OperationHandler {
         AccelerationHandler accelerationHandler = new AccelerationHandler();
         accelerationHandler.calculateTemporaryPoint(airplane, wayPoint, timeLeftToOtherAction);
         return airplane.getPosition();
+    }
+
+    @Override
+    public Airplane.Operation getOperation() {
+        return Airplane.Operation.PLACE_ROTATION;
     }
 }
