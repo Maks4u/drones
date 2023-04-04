@@ -31,6 +31,7 @@ public class FlyMaxSpeedHandler implements OperationHandler {
                 calculateTemporaryPoint(airplane, wayPoint, distanceToWayPoint.divide(airplane
                         .getPosition().getSpeed(), MathContext.DECIMAL128));
                 airplane.setOperation(Airplane.Operation.NO_ACTION);
+                wayPoint.setStatus(WayPoint.Status.PASSED);
                 return airplane.getPosition();
             }
             BigDecimal timeLeft = leftDistanceOnMaxSpeed.divide(airplane.getCharacteristics()

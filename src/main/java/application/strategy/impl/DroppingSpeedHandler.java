@@ -21,6 +21,7 @@ public class DroppingSpeedHandler implements OperationHandler {
                     .getWayPoints().size() == airplane.getFlights().get(airplane
                     .getFlights().size() - 1).getWayPoints().indexOf(wayPoint) + 1) {
                 airplane.setOperation(Airplane.Operation.NO_ACTION);
+                wayPoint.setStatus(WayPoint.Status.PASSED);
                 return airplane.getPosition();
             }
             WayPoint nextPoint = airplane.getFlights().get(airplane.getFlights().size() - 1)

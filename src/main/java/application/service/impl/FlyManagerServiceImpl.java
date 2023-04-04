@@ -78,7 +78,11 @@ public class FlyManagerServiceImpl implements FlyManagerService {
                 TemporaryPoint temporaryPoint = createNewPoint(airplane);
                 //update airplane in MongoDB
                 airplaneService.update(airplane);
-                System.out.println(i + " " + temporaryPoint + " " + airplane.getOperation().name());
+                if (point.getStatus().equals(WayPoint.Status.PASSED)) {
+                    System.out.println(i + " " + temporaryPoint + " " + airplane.getOperation().name() + " WayPoint PASSED");
+                } else {
+                    System.out.println(i + " " + temporaryPoint + " " + airplane.getOperation().name());
+                }
                 temporaryPoints.add(temporaryPoint);
                 flight.setPassedPoints(temporaryPoints);
             }
