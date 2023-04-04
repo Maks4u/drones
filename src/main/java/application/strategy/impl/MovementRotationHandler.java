@@ -10,6 +10,9 @@ import java.math.RoundingMode;
 import java.util.List;
 
 public class MovementRotationHandler implements OperationHandler {
+    private static final Integer LATITUDE_INDEX = 0;
+    private static final Integer LONGITUDE_INDEX = 1;
+
     @Override
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
         double wayDegree = DegreeHandler.getWayDegree(airplane, wayPoint);
@@ -31,8 +34,8 @@ public class MovementRotationHandler implements OperationHandler {
 
     public void calculateTemporaryPoint(Airplane airplane, WayPoint wayPoint, BigDecimal time) {
         List<Double> coords = CoordinateHandler.calculateNewCoordinatesRotating(airplane, time);
-        airplane.getPosition().setLatitude(String.valueOf(Math.toDegrees(coords.get(0))));
-        airplane.getPosition().setLongitude(String.valueOf(Math.toDegrees(coords.get(1))));
+        airplane.getPosition().setLatitude(String.valueOf(Math.toDegrees(coords.get(LATITUDE_INDEX))));
+        airplane.getPosition().setLongitude(String.valueOf(Math.toDegrees(coords.get(LONGITUDE_INDEX))));
 
         //calculate new degree
         double wayDegree = DegreeHandler.getWayDegree(airplane, wayPoint);
@@ -42,11 +45,11 @@ public class MovementRotationHandler implements OperationHandler {
 
         if (degreeToRotateLeft.compareTo(BigDecimal.ZERO) < 0) {
             BigDecimal plusDegree = rotatedValue.add(rotation.multiply(time));
-            if (plusDegree.compareTo(BigDecimal.valueOf(360L)) < 0) {
+            if (plusDegree.compareTo(DegreeHandler.MAX_CIRCLE_DEGREE) < 0) {
                 rotatedValue = plusDegree;
             } else {
                 rotatedValue = plusDegree
-                        .subtract(BigDecimal.valueOf(360L));
+                        .subtract(DegreeHandler.MAX_CIRCLE_DEGREE);
             }
         } else {
             BigDecimal minusDegree = rotatedValue.subtract(rotation.multiply(time));
@@ -54,7 +57,7 @@ public class MovementRotationHandler implements OperationHandler {
                 rotatedValue = minusDegree;
             } else {
                 rotatedValue = minusDegree
-                        .add(BigDecimal.valueOf(360L));
+                        .add(DegreeHandler.MAX_CIRCLE_DEGREE);
             }
         }
 
@@ -64,8 +67,8 @@ public class MovementRotationHandler implements OperationHandler {
 
     private BigDecimal getDegreeToRotateLeft(Airplane airplane, double wayDegree) {
         BigDecimal degreeToRotateLeft = DegreeHandler.getDegreeToRotateLeft(airplane, wayDegree);
-        if (degreeToRotateLeft.compareTo(BigDecimal.valueOf(180L)) > 0) {
-            degreeToRotateLeft = degreeToRotateLeft.subtract(BigDecimal.valueOf(360L));
+        if (degreeToRotateLeft.compareTo(DegreeHandler.HALF_CIRCLE_DEGREE) > 0) {
+            degreeToRotateLeft = degreeToRotateLeft.subtract(DegreeHandler.MAX_CIRCLE_DEGREE);
         }
         return degreeToRotateLeft;
     }

@@ -13,15 +13,11 @@ public class FlyMaxSpeedHandler implements OperationHandler {
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
         BigDecimal distanceToWayPoint = DistanceHandler.calculateAndSetDistanceToWayPoint(airplane,
                 wayPoint);
-
-        //distance need to drop speed to WayPoint pass speed(m)
         BigDecimal distanceToDropSpeed = ((wayPoint.getSpeed().multiply(wayPoint.getSpeed()))
                 .subtract(airplane.getPosition().getSpeed().multiply(airplane.getPosition()
                         .getSpeed()))).setScale(0, RoundingMode.DOWN).divide(BigDecimal
                 .valueOf(2L).multiply(airplane.getCharacteristics().getAcceleration()),
                 MathContext.DECIMAL128).abs();
-
-        //check the distance to WayPoint
         if (distanceToWayPoint.compareTo(distanceToDropSpeed.add(airplane
                 .getCharacteristics().getMaxSpeed())) <= 0) {
             BigDecimal leftDistanceOnMaxSpeed = distanceToWayPoint.subtract(distanceToDropSpeed);

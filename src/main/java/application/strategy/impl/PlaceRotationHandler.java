@@ -23,9 +23,9 @@ public class PlaceRotationHandler implements OperationHandler {
             BigDecimal rotation = airplane.getCharacteristics().getChangeDegreeSpeed();
             if (BigDecimal.valueOf(wayDegree).compareTo(BigDecimal.ZERO) >= 0) {
                 if (airplane.getPosition().getDegree().add(rotation)
-                        .compareTo(BigDecimal.valueOf(360L)) >= 0) {
+                        .compareTo(DegreeHandler.MAX_CIRCLE_DEGREE) >= 0) {
                     airplane.getPosition().setDegree(airplane.getPosition()
-                            .getDegree().subtract(BigDecimal.valueOf(360L)));
+                            .getDegree().subtract(DegreeHandler.MAX_CIRCLE_DEGREE));
                 }
                 airplane.getPosition().setDegree(airplane.getPosition()
                         .getDegree().add(rotation));
@@ -33,7 +33,7 @@ public class PlaceRotationHandler implements OperationHandler {
                 if (airplane.getPosition().getDegree().subtract(rotation)
                         .compareTo(BigDecimal.ZERO) < 0) {
                     airplane.getPosition().setDegree(airplane.getPosition().getDegree()
-                            .add(BigDecimal.valueOf(360L)));
+                            .add(DegreeHandler.MAX_CIRCLE_DEGREE));
                 }
                 airplane.getPosition().setDegree(airplane
                         .getPosition().getDegree().subtract(rotation));

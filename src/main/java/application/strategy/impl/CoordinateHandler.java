@@ -37,21 +37,15 @@ public class CoordinateHandler {
     }
 
     public static List<Double> calculateNewCoordinatesRotating(Airplane airplane, BigDecimal time) {
-        //start coordinates radiance
         double lat1 = Math.toRadians(Double.parseDouble(airplane.getPosition().getLatitude()));
         double lon1 = Math.toRadians(Double.parseDouble(airplane.getPosition().getLongitude()));
-
-        //start degree in radiance
         double brng = Math.toRadians(airplane.getPosition().getDegree().doubleValue());
-        //distance passed
         double d = airplane.getPosition().getSpeed().doubleValue() * time.doubleValue();
-
         double cosR = Math.cos(d / DistanceHandler.R.doubleValue());
         double sinR = Math.sin(d / DistanceHandler.R.doubleValue());
         double lat2 = Math.asin(Math.sin(lat1) * cosR + Math.cos(lat1) * sinR * Math.cos(brng));
         double lon2 = lon1 + Math.atan2(Math.sin(brng) * sinR * Math.cos(lat1),
                 cosR - Math.sin(lat1) * Math.sin(lat2));
-
         List<Double> coordinates = new ArrayList<>();
         coordinates.add(lat2);
         coordinates.add(lon2);

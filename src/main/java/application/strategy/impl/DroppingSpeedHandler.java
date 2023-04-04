@@ -11,10 +11,8 @@ import java.math.RoundingMode;
 public class DroppingSpeedHandler implements OperationHandler {
     @Override
     public TemporaryPoint getTemporaryPoint(Airplane airplane, WayPoint wayPoint) {
-        //time that need to drop speed to WayPoint value
         BigDecimal timeNeededToDropSpeedToWayPointValue = getTimeNeededToDropSpeed(airplane,
                 wayPoint);
-        //if time less than 1 sec we need to calculate position and go to next Handler
         if (timeNeededToDropSpeedToWayPointValue.compareTo(BigDecimal.ONE) <= 0) {
             calculateTemporaryPoint(airplane, wayPoint, timeNeededToDropSpeedToWayPointValue);
             if (airplane.getFlights().get(airplane.getFlights().size() - 1)
