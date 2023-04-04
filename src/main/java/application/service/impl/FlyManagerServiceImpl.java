@@ -11,6 +11,8 @@ import application.strategy.OperationHandler;
 import application.strategy.StrategyHandler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,8 @@ public class FlyManagerServiceImpl implements FlyManagerService {
         Flight flight = getFlight(airplane, wayPoints);
         List<TemporaryPoint> temporaryPoints = new ArrayList<>();
         temporaryPoints.add(createNewPoint(airplane));
-        logger.info("Point #{} {}", temporaryPoints.size(), airplane.getPosition());
+        logger.info("Point #{} {} {}", temporaryPoints.size(), airplane.getPosition(),
+                airplane.getOperation());
         airplane.setOperation(Airplane.Operation.PLACE_ROTATION);
         for (WayPoint point: wayPoints) {
             while (!airplane.getOperation().equals(Airplane.Operation.NO_ACTION)
@@ -47,7 +50,8 @@ public class FlyManagerServiceImpl implements FlyManagerService {
                 TemporaryPoint temporaryPoint = createNewPoint(airplane);
                 airplaneService.update(airplane);
                 temporaryPoints.add(temporaryPoint);
-                logger.info("Point #{} {}", temporaryPoints.size(), temporaryPoint);
+                logger.info("Point #{} {} {}", temporaryPoints.size(), temporaryPoint,
+                        airplane.getOperation());
                 flight.setPassedPoints(temporaryPoints);
             }
         }
@@ -77,9 +81,9 @@ public class FlyManagerServiceImpl implements FlyManagerService {
         if (airplane.getFlights() == null) {
             logger.info("Count of flights: 0 and their total duration: 0s");
         } else {
-            logger.info("Count of flights: " + airplane.getFlights().size()
-                    + " and their total duration: " + airplane.getFlights().stream()
-                    .map(Flight::getWayPoints).count() + "s");
+            logger.info(String.format("Count of flights: %d and their total duration: %ds",
+                    airplane.getFlights().size(), airplane.getFlights().stream()
+                    .mapToLong(x -> x.getPassedPoints().size()).sum()));
         }
     }
 
