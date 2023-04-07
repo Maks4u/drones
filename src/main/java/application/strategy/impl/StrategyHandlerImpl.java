@@ -4,13 +4,15 @@ import application.model.Airplane;
 import application.strategy.OperationHandler;
 import application.strategy.StrategyHandler;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StrategyHandlerImpl implements StrategyHandler {
-    @Autowired
-    private Map<Airplane.Operation, OperationHandler> action;
+    private final Map<Airplane.Operation, OperationHandler> action;
+
+    public StrategyHandlerImpl(Map<Airplane.Operation, OperationHandler> action) {
+        this.action = action;
+    }
 
     @Override
     public OperationHandler getOperationHandler(Airplane.Operation operation) {

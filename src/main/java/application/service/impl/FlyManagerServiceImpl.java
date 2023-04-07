@@ -11,8 +11,6 @@ import application.strategy.OperationHandler;
 import application.strategy.StrategyHandler;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -55,6 +53,7 @@ public class FlyManagerServiceImpl implements FlyManagerService {
                 flight.setPassedPoints(temporaryPoints);
             }
         }
+        logger.info("FLIGHT END" + System.lineSeparator());
         airplaneService.update(airplane);
         flightService.update(flight);
         return temporaryPoints;

@@ -5,14 +5,16 @@ import application.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StrategyConfig {
-    @Autowired
-    private List<OperationHandler> handlers;
+    private final List<OperationHandler> handlers;
+
+    public StrategyConfig(List<OperationHandler> handlers) {
+        this.handlers = handlers;
+    }
 
     @Bean
     Map<Airplane.Operation, OperationHandler> setMap() {
